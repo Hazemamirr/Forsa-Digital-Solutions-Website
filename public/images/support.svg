@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="400" height="300" fill="#F3F4F6"/>
+    
+    <!-- Headset with Animation -->
+    <path d="M150 150 C 150 120, 200 120, 200 150 C 200 180, 250 180, 250 150" 
+          stroke="#4F46E5" stroke-width="8" fill="none">
+        <animate attributeName="stroke-dasharray" from="0 300" to="300 0" dur="1.5s" begin="0s" fill="freeze"/>
+    </path>
+    
+    <!-- Chat Bubble with Animation -->
+    <path d="M250 100 L300 100 L300 150 L280 170 L250 150 Z" 
+          fill="#818CF8" stroke="#4F46E5" stroke-width="2">
+        <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.5s" fill="freeze"/>
+    </path>
+    
+    <!-- Support Person with Animation -->
+    <circle cx="150" cy="120" r="20" fill="#4F46E5">
+        <animate attributeName="r" from="0" to="20" dur="0.5s" begin="0s" fill="freeze"/>
+    </circle>
+    <path d="M130 160 C 130 140, 170 140, 170 160" 
+          stroke="#4F46E5" stroke-width="4" fill="none">
+        <animate attributeName="stroke-dasharray" from="0 100" to="100 0" dur="0.5s" begin="0.5s" fill="freeze"/>
+    </path>
+    
+    <!-- Connection Lines with Animation -->
+    <path d="M150 150 L200 150" stroke="#4F46E5" stroke-width="2" stroke-dasharray="4 4">
+        <animate attributeName="stroke-dashoffset" from="0" to="8" dur="1s" repeatCount="indefinite"/>
+    </path>
+    <path d="M200 150 L250 150" stroke="#4F46E5" stroke-width="2">
+        <animate attributeName="stroke-dasharray" from="0 50" to="50 0" dur="0.5s" begin="1s" fill="freeze"/>
+    </path>
+</svg> 
