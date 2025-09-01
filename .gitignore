@@ -1,21 +1,29 @@
-# dependencies
+Set-Content .gitignore @"
+# deps
 node_modules/
 **/node_modules/
 
-# build output
+# builds
 dist/
 **/dist/
+build/
+**/build/
 
-# env files
+# env & secrets
 .env
 .env.*
 **/.env
+**/.env.*
 
 # logs
 *.log
 npm-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# system
-.DS_Store
+# editor/OS
 .vscode/
+.idea/
+.DS_Store
+Thumbs.db
+"@
