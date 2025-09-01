@@ -4,6 +4,8 @@ import { Services } from '../components/Services';
 import { Contact } from '../components/Contact';
 import { Testimonials } from '../components/Testimonials';
 import { withPageAnimation } from '../components/withPageAnimation';
+import loomLogo from '/images/Loom-logo.jpg';
+import sbLogo from '/images/SB-logo.jpg';
 
 export default function HomePage() {
   const scrollToContact = (e) => {
@@ -25,8 +27,8 @@ export default function HomePage() {
             Trusted By Industry Leaders
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
-            <img src="/images/Zamalek-logo.png" alt="Company 1 - Zamalek" className="h-20 opacity-50 hover:opacity-100 transition-opacity" />
-            <img src="/images/nike-logo.jpg" alt="Company 2 - Nike" className="h-20 opacity-50 hover:opacity-100 transition-opacity" />
+            <img src={loomLogo} alt="Company 1 - Loom" className="h-20 opacity-50 hover:opacity-100 transition-opacity" />
+            <img src={sbLogo} alt="Company 2 - SB" className="h-20 opacity-50 hover:opacity-100 transition-opacity" />
           </div>
         </div>
       </section>
@@ -34,9 +36,9 @@ export default function HomePage() {
       {/* Why Choose Us Section */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
-            Why Choose Forsa-Analytics?
-          </h2>
+                     <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
+             Why Choose Forsa?
+           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-6 bg-gray-50 rounded-lg">
               <h3 className="text-xl font-semibold mb-6">We speak startup language</h3>
@@ -64,18 +66,16 @@ export default function HomePage() {
       <Testimonials />
 
       {/* Contact Section */}
-      <section id="contact-section" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
-              Transform Your Data Strategy
-            </h2>
-            <p className="text-xl text-gray-600">
-              Ready to take your data strategy to the next level? Let's talk.
-            </p>
-          </div>
-          <Contact />
+      <section id="contact-section" className="py-24 px-6 bg-gradient-to-r from-primary-700 to-primary-900">
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <h2 className="text-3xl font-bold text-white mb-6">
+            Ready to Get Started?
+          </h2>
+          <p className="text-xl text-primary-100">
+            Let's discuss how we can help transform your Shopify data into actionable insights.
+          </p>
         </div>
+        <Contact />
       </section>
     </div>
   );

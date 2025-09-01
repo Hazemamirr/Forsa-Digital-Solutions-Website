@@ -111,7 +111,7 @@ export function Contact() {
                   <FaEnvelope className="w-6 h-6 text-primary-600 mt-1" />
                   <div>
                     <h4 className="font-semibold text-secondary-900">Email</h4>
-                    <p className="text-secondary-600">contact@forsa-analytics.com</p>
+                    <p className="text-secondary-600">contact@fdsegypt.com</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -125,7 +125,7 @@ export function Contact() {
                   <FaMapMarkerAlt className="w-6 h-6 text-primary-600 mt-1" />
                   <div>
                     <h4 className="font-semibold text-secondary-900">Location</h4>
-                    <p className="text-secondary-600">123 Data Street, Tech City, TC 12345</p>
+                    <p className="text-secondary-600">Cairo, Egypt</p>
                   </div>
                 </div>
               </div>
@@ -138,7 +138,7 @@ export function Contact() {
               <ul className="space-y-4">
                 <li className="flex items-start space-x-3">
                   <FaCheck className="w-5 h-5 text-primary-600 mt-1" />
-                  <span className="text-secondary-600">Expert team with 15+ years of experience</span>
+                  <span className="text-secondary-600">Expert team</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <FaCheck className="w-5 h-5 text-primary-600 mt-1" />

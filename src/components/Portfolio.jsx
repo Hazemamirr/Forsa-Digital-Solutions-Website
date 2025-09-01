@@ -48,7 +48,7 @@ export function Portfolio() {
   console.log('Rendering Portfolio component with', projects.length, 'projects');
 
   return (
-    <div className="bg-gradient-to-b from-secondary-50 to-white">
+    <div id="portfolio" className="bg-gradient-to-b from-secondary-50 to-white">
       {/* Portfolio Header */}
       <section className="py-24 px-6 bg-gradient-to-r from-primary-700 to-primary-900">
         <div className="max-w-4xl mx-auto text-center animate-on-scroll">
@@ -129,11 +129,7 @@ export function Portfolio() {
                     </ul>
                   </div>
 
-                  {/* View Project Button */}
-                  <button className="w-full mt-4 bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition-colors duration-300 flex items-center justify-center group">
-                    <span className="mr-2">Request Access</span>
-                    <FaArrowRight className="text-sm transform transition-transform duration-300 group-hover:translate-x-1" />
-                  </button>
+
                 </div>
               </div>
             ))}

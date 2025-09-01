@@ -1,26 +1,22 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
-import { Navbar } from './components/Navbar';
-import { Footer } from './components/Footer';
+import { Navbar } from "./components/Navbar.jsx";
+import { Footer } from "./components/Footer.jsx";
 
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ServicesPage from './pages/ServicesPage';
-import PortfolioPage from './pages/PortfolioPage';
-import ProjectsPage from './pages/ProjectsPage';
-import UseCasesPage from './pages/UseCasesPage';
-import ContactPage from './pages/ContactPage';
-import { useIntersectionObserver } from './hooks/useIntersectionObserver';
+import HomePage from "./pages/HomePage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
+import ServicesPage from "./pages/ServicesPage.jsx";
+import PortfolioPage from "./pages/PortfolioPage.jsx";
+import ProjectsPage from "./pages/ProjectsPage.jsx";
+import UseCasesPage from "./pages/UseCasesPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
 
-export function App() {
-  useIntersectionObserver();
-
+export default function App() {
   return (
     <Router>
       <div className="font-sans text-gray-800 bg-white min-h-screen">
         <Navbar />
-        <main className="pt-16">
+        <main className="pt-16 sm:pt-20">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />

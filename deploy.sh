@@ -1,0 +1,53 @@
+#!/bin/bash
+
+echo "🚀 Forsa Analytics Website Deployment Script"
+echo "=============================================="
+echo ""
+
+echo "📋 Prerequisites Check:"
+echo "1. GitHub repository with your code ✓"
+echo "2. Railway account (railway.app) ✓"
+echo "3. Vercel account (vercel.com) ✓"
+echo "4. Custom domain purchased ✓"
+echo ""
+
+echo "🔧 Backend Deployment (Railway):"
+echo "1. Go to railway.app and create new project"
+echo "2. Connect your GitHub repository"
+echo "3. Select 'contact-backend' folder"
+echo "4. Set environment variables:"
+echo "   - GMAIL_USER=your-email@gmail.com"
+echo "   - GMAIL_PASS=your-gmail-app-password"
+echo "5. Deploy and note the URL"
+echo ""
+
+echo "🌐 Frontend Deployment (Vercel):"
+echo "1. Go to vercel.com and import your repository"
+echo "2. Set root directory to 'vite-react'"
+echo "3. Framework preset: Vite"
+echo "4. Update API endpoint in Contact.jsx with Railway URL"
+echo "5. Deploy"
+echo ""
+
+echo "🔗 Custom Domain Setup:"
+echo "1. In Vercel dashboard, go to Domains"
+echo "2. Add your custom domain"
+echo "3. Follow DNS configuration instructions"
+echo "4. Wait for DNS propagation (24-48 hours)"
+echo ""
+
+echo "✅ Testing Checklist:"
+echo "- [ ] Backend responds at Railway URL"
+echo "- [ ] Frontend loads at custom domain"
+echo "- [ ] Contact form submits successfully"
+echo "- [ ] Email is received"
+echo ""
+
+echo "📚 Resources:"
+echo "- Railway Docs: https://docs.railway.app"
+echo "- Vercel Docs: https://vercel.com/docs"
+echo "- Deployment Guide: DEPLOYMENT.md"
+echo ""
+
+echo "🎉 Ready to deploy! Follow the steps above."
+echo "Need help? Check the DEPLOYMENT.md file for detailed instructions."

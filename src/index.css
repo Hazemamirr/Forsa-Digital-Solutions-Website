@@ -6,10 +6,30 @@
   :root {
     @apply bg-gradient-to-b from-secondary-50 to-white min-h-screen;
   }
-}
-
-body {
-  background: linear-gradient(to right, #f0f4f8, #e0e7ff);
+  
+  /* Mobile-first responsive base styles */
+  html {
+    font-size: 16px;
+  }
+  
+  /* Improve text rendering on mobile */
+  body {
+    background: linear-gradient(to right, #f0f4f8, #e0e7ff);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Better touch targets on mobile */
+  button, a, input, textarea, select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve form elements on mobile */
+  input, textarea, select {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
 }
 
 /* Animation Keyframes */
@@ -156,6 +176,23 @@ body {
   .stagger-3 { animation-delay: 0.3s; }
   .stagger-4 { animation-delay: 0.4s; }
   .stagger-5 { animation-delay: 0.5s; }
+  
+  /* Responsive utilities */
+  .container-responsive {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .text-responsive {
+    @apply text-sm sm:text-base md:text-lg lg:text-xl;
+  }
+  
+  .heading-responsive {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  .spacing-responsive {
+    @apply py-8 sm:py-12 md:py-16 lg:py-20;
+  }
 }
 
 /* Smooth Scrolling */
@@ -191,4 +228,47 @@ body::before {
   background: linear-gradient(45deg, rgba(224, 231, 255, 0.8), rgba(240, 244, 248, 0.8));
   animation: pulse 10s ease-in-out infinite;
   z-index: -1;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Reduce animations on mobile for better performance */
+  .animate-on-scroll {
+    transition: all 0.3s ease-out;
+  }
+  
+  /* Improve touch interactions */
+  .hover-lift:hover,
+  .hover-scale:hover,
+  .hover-glow:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Better mobile spacing */
+  .mobile-spacing {
+    @apply px-4 py-6;
+  }
+}
+
+/* Tablet improvements */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet-spacing {
+    @apply px-6 py-8;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Landscape mobile orientation */
+@media (max-width: 640px) and (orientation: landscape) {
+  .landscape-adjust {
+    @apply py-4;
+  }
 }

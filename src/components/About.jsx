@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaChartLine, FaUsers, FaLightbulb, FaRocket, FaAward, FaHandshake } from 'react-icons/fa';
 import { Contact } from './Contact';
+import logo from '/Forsa-Analytics_Logo.png';
+import hazemMowafi from '/images/team/Hazem Mowafi.jpg';
+import hamzaTayel from '/images/team/Hamza Tayel.jpg';
+import hazemAmir from '/images/team/Hazem Amir.jpg';
+// Removed import coo
 
 export function About() {
   useEffect(() => {
@@ -62,27 +67,27 @@ export function About() {
       title: "CEO",
       role: "Co-founder",
       expertise: "Data Analyst and Visualization Expert",
-      bio: `Hazem Mowafi is currently pursuing a Bachelor's degree in Business Informatics at the German University in Cairo, with expected graduation in 2026. He has gained hands-on experience through student roles at Nestlé and Siemens Mobility, where he analyzed and visualized data using tools such as Excel, Power BI, Python, and SQL to drive business decisions and process improvements. At Nestlé, Hazem focused on automating reports and cleaning multi-source datasets for accurate analysis, while at Siemens he developed interactive dashboards to streamline documentation workflows. He also participated in marketing and sales initiatives at The Address Investments. Hazem holds certifications from IBM and Microsoft in data science and Power BI and is proficient in Python, Java, HTML, CSS, SQL, and Tableau.`
+      bio: `With hands-on experience in data analytics, visualization, and digital solutions, Hazem has contributed to projects that improve reporting, streamline workflows, and support smarter business decisions. Certified through the IBM Data Science Professional Certificate, he focuses on turning data into clear insights and practical solutions. He is motivated by a vision of helping organizations harness data and digital innovation to drive sustainable growth and long-term success.`
     },
     {
       name: "Hamza Tayel",
       title: "CTO",
       role: "Co-founder",
       expertise: "AI and Machine Learning Expert",
-      bio: `Hamza Tayel is a third-year Business Informatics student at the German University in Cairo with a strong foundation in data analysis and visualization. He interned at Banque Du Caire, where he supported the Data Analytics department by building dashboards using Power BI and working with ERP systems and cloud-based AI tools. He also interned at Majid Al-Futtaim, where he performed data cleaning and analysis using Python. Hamza is proficient in Python, SQL, Excel, and data science libraries like Pandas and Scikit-learn. He has experience with Tableau, JupyterLab, and RapidMiner and holds certifications from IBM and SAP. Passionate about blending business and technology, Hamza brings analytical thinking, strong communication, and a collaborative mindset to every team he joins.`
+      bio: `Hamza Tayel is one of our Co-Founders with hands-on experience in data analytics, visualization, and AI-driven solutions, he has worked on projects ranging from building intelligent chatbots to designing interactive dashboards in Power BI and SQL pipelines. Certified through the IBM Data Science Professional Certificate and SAP Fundamentals, Hamza bridges business and technology by transforming complex data into actionable insights. His passion lies in empowering organizations to make smarter, data-driven decisions.`
     },
     {
       name: "Hazem Amir",
       title: "COO",
       role: "Co-founder",
-      expertise: "Expert in Data Security",
-      bio: `Hazem Amir is currently pursuing a Bachelor's degree in Computer Engineering at the Egypt University of Informatics, with expected graduation in 2026. He gained practical experience during a Software Engineering internship at Incorta, where he worked on internal tools using Python and SQL, optimized backend services, and integrated APIs to enhance data dashboards. Hazem also took part in the InnovEgypt training program, contributing to the ideation of a potential tech startup. He is skilled in mobile and web development using Flutter, JavaScript, and Node.js, and has hands-on experience in cybersecurity and AI/ML using TensorFlow and PyTorch. He holds multiple certifications from IBM in cybersecurity and AI, and brings strong communication, analytical thinking, and technical skills to any team.`
+      expertise: "Data Security Expert",
+      bio: `With hands-on experience in cybersecurity, penetration testing, media buying, and digital solutions, Hazem has contributed to projects that strengthen system security, enhance online presence, and support smarter business decisions. Certified through the IBM Cybersecurity Analyst Professional Certificate and advanced specialization programs, he has applied skills in Python scripting, network defense, and incident response alongside expertise in managing digital ad campaigns and optimizing marketing performance. His work spans ethical hacking, web application testing, cryptographic tools, and data-driven media strategies, all aimed at building resilient systems and expanding business growth. Motivated by a vision of helping organizations harness both security and digital innovation, he is dedicated to turning technical expertise and marketing insights into sustainable solutions and long-term success.`
     }
   ];
   const [selectedMember, setSelectedMember] = useState(null);
 
   return (
-    <div className="bg-gradient-to-b from-secondary-50 to-white">
+    <div id="about" className="bg-gradient-to-b from-secondary-50 to-white">
       {/* Our Story Section */}
       <section className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
@@ -100,7 +105,7 @@ export function About() {
               </p>
             </div>
             <div className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto">
-              <img src="/Forsa-Analytics_Logo.png" alt="Forsa-Analytics Logo" className="w-full max-w-3xl max-h-56 object-contain rounded-lg" />
+              <img src={logo} alt="Forsa-Analytics Logo" className="w-full max-w-3xl max-h-56 object-contain rounded-lg" />
             </div>
           </div>
           {/* Remove the Our team collaborating image and its container from the Our Story section */}
@@ -151,9 +156,11 @@ export function About() {
                 <div className="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden transform transition-transform duration-300 group-hover:scale-105 shadow-lg">
                   <img 
                     src={
-                      member.name === "Hazem Mowafi" ? "/images/team/Hazem Mowafi.jpg" :
-                      member.name === "Hamza Tayel" ? "/images/team/Hamza Tayel.jpg" :
-                      "/images/team/coo.jpg"
+                      member.name === "Hazem Mowafi" ? hazemMowafi :
+                      member.name === "Hamza Tayel" ? hamzaTayel :
+                      member.name === "Hazem Amir" ? hazemAmir :
+                      // Use a placeholder avatar for the third member
+                      `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random&size=256`
                     }
                     alt={member.title}
                     className="w-full h-full object-cover"
