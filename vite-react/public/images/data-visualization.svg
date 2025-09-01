@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="400" height="300" fill="#F3F4F6"/>
+    
+    <!-- Pie Chart with Animation -->
+    <circle cx="150" cy="150" r="60" fill="none" stroke="#E5E7EB" stroke-width="2">
+        <animate attributeName="stroke-dasharray" from="0 377" to="377 0" dur="1.5s" begin="0s" fill="freeze"/>
+    </circle>
+    <path d="M150 150 L150 90 A60 60 0 0 1 195 195 Z" fill="#4F46E5">
+        <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.5s" fill="freeze"/>
+    </path>
+    <path d="M150 150 L195 195 A60 60 0 0 1 90 195 Z" fill="#818CF8">
+        <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.7s" fill="freeze"/>
+    </path>
+    <path d="M150 150 L90 195 A60 60 0 0 1 150 90 Z" fill="#C7D2FE">
+        <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.9s" fill="freeze"/>
+    </path>
+    
+    <!-- Bar Chart with Animation -->
+    <rect x="250" y="100" width="20" height="80" fill="#4F46E5">
+        <animate attributeName="height" from="0" to="80" dur="0.5s" begin="2.2s" fill="freeze"/>
+    </rect>
+    <rect x="280" y="120" width="20" height="60" fill="#818CF8">
+        <animate attributeName="height" from="0" to="60" dur="0.5s" begin="2.4s" fill="freeze"/>
+    </rect>
+    <rect x="310" y="80" width="20" height="100" fill="#C7D2FE">
+        <animate attributeName="height" from="0" to="100" dur="0.5s" begin="2.6s" fill="freeze"/>
+    </rect>
+    
+    <!-- Connection Lines with Animation -->
+    <path d="M150 150 L250 150" stroke="#4F46E5" stroke-width="2" stroke-dasharray="4 4">
+        <animate attributeName="stroke-dashoffset" from="0" to="8" dur="1s" repeatCount="indefinite"/>
+    </path>
+    <path d="M210 150 L250 150" stroke="#4F46E5" stroke-width="2">
+        <animate attributeName="stroke-dasharray" from="0 40" to="40 0" dur="0.5s" begin="2.1s" fill="freeze"/>
+    </path>
+    
+    <!-- Data Points with Animation -->
+    <circle cx="150" cy="150" r="4" fill="#4F46E5">
+        <animate attributeName="r" from="0" to="4" dur="0.5s" begin="2.8s" fill="freeze"/>
+    </circle>
+    <circle cx="250" cy="150" r="4" fill="#4F46E5">
+        <animate attributeName="r" from="0" to="4" dur="0.5s" begin="2.8s" fill="freeze"/>
+    </circle>
+</svg> 
