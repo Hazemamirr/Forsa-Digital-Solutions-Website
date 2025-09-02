@@ -1,87 +1,63 @@
-const express = require("express");
-const nodemailer = require("nodemailer");
-const cors = require("cors");
-const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
-const Joi = require("joi");
-require("dotenv").config();
-
-const app = express();
-
-/* Security + JSON parsing */
-app.use(helmet());
-app.use(express.json());
-
-/* CORS: allow your domains */
-const allowedHosts = new Set(["fdsegypt.com", "www.fdsegypt.com"]);
-app.use(
-  cors({
-    origin(origin, cb) {
-      if (!origin) return cb(null, true);
-      try {
-        const host = new URL(origin).hostname;
-        return cb(null, allowedHosts.has(host));
-      } catch {
-        return cb(null, false);
-      }
-    },
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
-
-/* Health checks */
-app.get("/", (_req, res) => res.json({ status: "OK", message: "Contact API is running" }));
-app.get("/health", (_req, res) => res.json({ ok: true }));
-
-/* Rate limit */
-const emailLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 5,
-  message: "Too many requests from this IP, please try again later.",
-});
-
-/* Email transporter (always Namecheap SMTP) */
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || "mail.privateemail.com",
-  port: Number(process.env.SMTP_PORT || 465),
-  secure: process.env.SMTP_SECURE === "true",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
-/* POST /send-email */
 app.post("/send-email", emailLimiter, async (req, res) => {
   const schema = Joi.object({
     fullName: Joi.string().min(2).max(100).required(),
     email: Joi.string().email().required(),
     company: Joi.string().min(2).max(100).required(),
-    message: Joi.string().min(10).max(2000).required(),
+    message: Joi.string().min(20).max(2000).required(),
   });
 
   const { error, value } = schema.validate(req.body);
-  if (error) return res.status(400).json({ success: false, message: "Invalid input", details: error.details });
+  if (error) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid input",
+      details: error.details,
+    });
+  }
 
   const { fullName, email, company, message } = value;
+
+  // --- Namecheap Private Email SMTP ---
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || "mail.privateemail.com",
+    port: Number(process.env.SMTP_PORT || 465), // 465 = SSL, 587 = STARTTLS
+    secure: process.env.SMTP_SECURE
+      ? process.env.SMTP_SECURE === "true"
+      : true,
+    auth: {
+      user: process.env.EMAIL_USER, // contact@fdsegypt.com
+      pass: process.env.EMAIL_PASS, // mailbox password / app password
+    },
+    connectionTimeout: 10000, // 10s
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
+  });
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
     replyTo: email,
     to: process.env.CONTACT_TO || process.env.EMAIL_USER,
     subject: `New message from ${fullName} (${company})`,
-    text: `Name: ${fullName}\nEmail: ${email}\nCompany: ${company}\n\nMessage:\n${message}`,
+    text: `Name: ${fullName}
+Email: ${email}
+Company: ${company}
+
+Message:
+${message}`,
   };
 
   try {
+    console.log("[send-email] Attempting SMTP send…");
     await transporter.sendMail(mailOptions);
+    console.log("[send-email] ✅ Email sent successfully");
     res.status(200).json({ success: true, message: "Email sent successfully!" });
   } catch (err) {
-    console.error("Email error:", err);
+    console.error("[send-email] ❌ Email error:", {
+      name: err.name,
+      code: err.code,
+      responseCode: err.responseCode,
+      message: err.message,
+    });
     res.status(500).json({ success: false, message: "Email failed to send." });
   }
 });
-
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
