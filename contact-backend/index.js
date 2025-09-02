@@ -13,19 +13,36 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 
-// CORS: your public domains
-const allowedHosts = new Set(["fdsegypt.com", "www.fdsegypt.com"]);
+// CORS: Allow your domains and Vercel deployment
+const allowedOrigins = [
+  "https://fdsegypt.com",
+  "https://www.fdsegypt.com",
+  // Add your Vercel app URL here (replace with your actual Vercel domain)
+  "https://your-app-name.vercel.app",
+  // For local development
+  "http://localhost:3000",
+  "http://localhost:3001"
+];
+
 app.use(
   cors({
-    origin(origin, cb) {
-      if (!origin) return cb(null, true);
-      try {
-        const host = new URL(origin).hostname;
-        cb(null, allowedHosts.has(host));
-      } catch {
-        cb(null, false);
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps, Postman, etc.)
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        // Allow subdomains of vercel.app for preview deployments
+        const hostname = new URL(origin).hostname;
+        if (hostname.endsWith('.vercel.app')) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
       }
     },
+    credentials: true
   })
 );
 
@@ -51,7 +68,7 @@ function buildTransporterFromEnv() {
     connectionTimeout: 15000, // 15s
     greetingTimeout: 15000,
     socketTimeout: 20000,
-    // If the provider’s cert chain is quirky, this prevents false negatives
+    // If the provider's cert chain is quirky, this prevents false negatives
     tls: {
       rejectUnauthorized: true,
       // You can flip this to false ONLY to test if certs are the issue:
