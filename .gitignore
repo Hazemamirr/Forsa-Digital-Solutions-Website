@@ -27,3 +27,23 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 "@
+
+contact-backend/.env
+
+**/.env
+
+# general
+
+node_modules/
+
+**/node_modules/
+
+.env
+
+**/.env
+
+# build outputs
+
+dist/
+
+build/

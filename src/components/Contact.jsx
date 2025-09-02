@@ -1,71 +1,76 @@
 import React, { useState } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaCheck, FaTimes } from 'react-icons/fa';
 
+// Prefer env; fall back to production API if not set (handy in previews)
+const API_BASE =
+  import.meta.env.VITE_API_URL?.trim() ||
+  'https://api.fdsegypt.com';
+
 export function Contact() {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     company: '',
-    message: ''
+    message: '',
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
 
   const validateForm = () => {
-    const newErrors = {};
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
-    }
+    const e = {};
+    if (!formData.fullName.trim()) e.fullName = 'Full name is required';
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      e.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      e.email = 'Please enter a valid email address';
     }
-    if (!formData.company.trim()) {
-      newErrors.company = 'Company name is required';
-    }
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    if (!formData.company.trim()) e.company = 'Company name is required';
+    if (!formData.message.trim()) e.message = 'Message is required';
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  // small helper to avoid hanging forever on fetch
+  const fetchWithTimeout = (url, options, ms = 15000) => {
+    const controller = new AbortController();
+    const t = setTimeout(() => controller.abort(), ms);
+    return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(t));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submit attempted', formData);
-    if (!validateForm()) {
-      console.log('Validation failed', errors);
-      return;
-    }
-
-    setIsSubmitting(true);
     setSubmitStatus(null);
 
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+
     try {
-      // Send form data to backend API
-      const response = await fetch('http://localhost:5000/send-email', {
+      const res = await fetchWithTimeout(`${API_BASE}/send-email`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
+        // no credentials; CORS preflight handled server-side
         body: JSON.stringify(formData),
       });
-      const data = await response.json();
-      if (response.ok && data.success) {
+
+      // Try to parse JSON; if not JSON, make a best-effort object
+      let data = null;
+      try {
+        data = await res.json();
+      } catch {
+        data = null;
+      }
+
+      if (res.ok && data?.success) {
         setSubmitStatus('success');
-        setFormData({
-          fullName: '',
-          email: '',
-          company: '',
-          message: ''
-        });
+        setFormData({ fullName: '', email: '', company: '', message: '' });
+        setErrors({});
       } else {
         setSubmitStatus('error');
       }
-    } catch (error) {
+    } catch (err) {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -74,17 +79,8 @@ export function Contact() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
   return (
@@ -95,7 +91,7 @@ export function Contact() {
             Get in Touch
           </h2>
           <p className="text-xl text-secondary-600 max-w-2xl mx-auto">
-            Ready to transform your data strategy? Let's discuss how we can help you achieve your goals.
+            Ready to transform your data strategy? Let&apos;s discuss how we can help you achieve your goals.
           </p>
         </div>
 
@@ -158,7 +154,7 @@ export function Contact() {
 
           {/* Contact Form */}
           <div className="bg-white rounded-xl shadow-lg p-8 border border-secondary-100">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div>
                 <label htmlFor="fullName" className="block text-sm font-medium text-secondary-700 mb-1">
                   Full Name
@@ -167,6 +163,7 @@ export function Contact() {
                   type="text"
                   id="fullName"
                   name="fullName"
+                  required
                   value={formData.fullName}
                   onChange={handleChange}
                   className={`w-full px-4 py-2 rounded-lg border ${
@@ -174,9 +171,7 @@ export function Contact() {
                   } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
                   placeholder="John Doe"
                 />
-                {errors.fullName && (
-                  <p className="mt-1 text-sm text-red-600">{errors.fullName}</p>
-                )}
+                {errors.fullName && <p className="mt-1 text-sm text-red-600">{errors.fullName}</p>}
               </div>
 
               <div>
@@ -187,6 +182,7 @@ export function Contact() {
                   type="email"
                   id="email"
                   name="email"
+                  required
                   value={formData.email}
                   onChange={handleChange}
                   className={`w-full px-4 py-2 rounded-lg border ${
@@ -194,9 +190,7 @@ export function Contact() {
                   } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
                   placeholder="john@company.com"
                 />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-                )}
+                {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
               </div>
 
               <div>
@@ -207,6 +201,7 @@ export function Contact() {
                   type="text"
                   id="company"
                   name="company"
+                  required
                   value={formData.company}
                   onChange={handleChange}
                   className={`w-full px-4 py-2 rounded-lg border ${
@@ -214,9 +209,7 @@ export function Contact() {
                   } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
                   placeholder="Your Company"
                 />
-                {errors.company && (
-                  <p className="mt-1 text-sm text-red-600">{errors.company}</p>
-                )}
+                {errors.company && <p className="mt-1 text-sm text-red-600">{errors.company}</p>}
               </div>
 
               <div>
@@ -226,6 +219,7 @@ export function Contact() {
                 <textarea
                   id="message"
                   name="message"
+                  required
                   value={formData.message}
                   onChange={handleChange}
                   rows="4"
@@ -233,26 +227,31 @@ export function Contact() {
                     errors.message ? 'border-red-500' : 'border-secondary-300'
                   } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
                   placeholder="Tell us about your project..."
-                ></textarea>
-                {errors.message && (
-                  <p className="mt-1 text-sm text-red-600">{errors.message}</p>
-                )}
+                />
+                {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className={`w-full bg-primary-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 ${
-                  isSubmitting
-                    ? 'opacity-75 cursor-not-allowed'
-                    : 'hover:bg-primary-700 hover:shadow-lg'
+                  isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:bg-primary-700 hover:shadow-lg'
                 }`}
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
                     </svg>
                     Sending...
                   </span>
@@ -264,7 +263,7 @@ export function Contact() {
               {submitStatus === 'success' && (
                 <div className="flex items-center space-x-2 text-green-600 bg-green-50 p-4 rounded-lg">
                   <FaCheck className="w-5 h-5" />
-                  <p>Message sent successfully! We'll get back to you soon.</p>
+                  <p>Message sent successfully! We&apos;ll get back to you soon.</p>
                 </div>
               )}
 
@@ -280,4 +279,4 @@ export function Contact() {
       </div>
     </section>
   );
-} 
+}
