@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaCheck, FaTimes } from 'react-icons/fa';
 
-// Prefer env; fall back to production API if not set (handy in previews)
+// Prefer env in builds; fall back to your production API
 const API_BASE =
-  import.meta.env.VITE_API_URL?.trim() ||
+  (typeof import.meta !== 'undefined' &&
+    import.meta.env &&
+    import.meta.env.VITE_API_URL &&
+    String(import.meta.env.VITE_API_URL).trim()) ||
   'https://api.fdsegypt.com';
 
-export function Contact() {
+export default function Contact() {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -32,15 +35,16 @@ export function Contact() {
     return Object.keys(e).length === 0;
   };
 
-  // small helper to avoid hanging forever on fetch
+  // Helper to avoid indefinite waits
   const fetchWithTimeout = (url, options, ms = 15000) => {
     const controller = new AbortController();
     const t = setTimeout(() => controller.abort(), ms);
-    return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(t));
+    return fetch(url, { ...options, signal: controller.signal })
+      .finally(() => clearTimeout(t));
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // prevent full page reload
     setSubmitStatus(null);
 
     if (!validateForm()) return;
@@ -51,16 +55,14 @@ export function Contact() {
       const res = await fetchWithTimeout(`${API_BASE}/send-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // no credentials; CORS preflight handled server-side
         body: JSON.stringify(formData),
       });
 
-      // Try to parse JSON; if not JSON, make a best-effort object
       let data = null;
       try {
         data = await res.json();
       } catch {
-        data = null;
+        // non-JSON response
       }
 
       if (res.ok && data?.success) {
@@ -70,7 +72,7 @@ export function Contact() {
       } else {
         setSubmitStatus('error');
       }
-    } catch (err) {
+    } catch (_err) {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
