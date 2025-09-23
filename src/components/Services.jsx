@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FaChartLine, FaDatabase, FaRobot, FaCloud, FaShieldAlt, FaCode, FaShopify, FaFileAlt, FaChartBar, FaEye } from 'react-icons/fa';
-import { Contact } from './Contact';
+import Contact from './Contact';
 
 export function Services() {
   useEffect(() => {

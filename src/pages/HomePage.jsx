@@ -1,7 +1,7 @@
 import React from 'react';
 import { HeroSection } from '../components/HeroSection';
 import { Services } from '../components/Services';
-import { Contact } from '../components/Contact';
+import Contact from '../components/Contact';
 import { Testimonials } from '../components/Testimonials';
 import { withPageAnimation } from '../components/withPageAnimation';
 import loomLogo from '/images/Loom-logo.jpg';

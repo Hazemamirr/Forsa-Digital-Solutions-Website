@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaChartLine, FaUsers, FaLightbulb, FaRocket, FaAward, FaHandshake } from 'react-icons/fa';
-import { Contact } from './Contact';
+import Contact from './Contact';
 import logo from '/images/Forsa-Digital-Solutions-Logo.png';
 import hazemMowafi from '/images/team/Hazem Mowafi.jpg';
 import hamzaTayel from '/images/team/Hamza Tayel.jpg';
