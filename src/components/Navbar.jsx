@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import logo from '/images/Forsa-Digital-Solutions-Logo.png';
 import { Link, useLocation } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi';
 
@@ -45,11 +46,14 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Brand on the left */}
+          {/* Brand on the left (logo) */}
           <div className="flex-shrink-0">
-            <Link to="/" className="font-bold text-lg sm:text-xl md:text-2xl text-primary-800 tracking-wide">
-              <span className="hidden xs:inline">Forsa Digital Solutions</span>
-              <span className="xs:hidden">Forsa</span>
+            <Link to="/" className="block">
+              <img
+                src={logo}
+                alt="Forsa Digital Solutions"
+                className="h-8 sm:h-9 md:h-10 w-auto object-contain"
+              />
             </Link>
           </div>
           
