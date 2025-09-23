@@ -116,7 +116,7 @@ export default function Contact() {
                   <FaPhone className="w-6 h-6 text-primary-600 mt-1" />
                   <div>
                     <h4 className="font-semibold text-secondary-900">Phone</h4>
-                    <p className="text-secondary-600">+1 (555) 123-4567</p>
+                    <p className="text-secondary-600">+201067000268</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -168,9 +168,8 @@ export default function Contact() {
                   required
                   value={formData.fullName}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-lg border ${
-                    errors.fullName ? 'border-red-500' : 'border-secondary-300'
-                  } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
+                  className={`w-full px-4 py-2 rounded-lg border ${errors.fullName ? 'border-red-500' : 'border-secondary-300'
+                    } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
                   placeholder="John Doe"
                 />
                 {errors.fullName && <p className="mt-1 text-sm text-red-600">{errors.fullName}</p>}
@@ -187,9 +186,8 @@ export default function Contact() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-lg border ${
-                    errors.email ? 'border-red-500' : 'border-secondary-300'
-                  } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
+                  className={`w-full px-4 py-2 rounded-lg border ${errors.email ? 'border-red-500' : 'border-secondary-300'
+                    } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
                   placeholder="john@company.com"
                 />
                 {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
@@ -206,9 +204,8 @@ export default function Contact() {
                   required
                   value={formData.company}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-lg border ${
-                    errors.company ? 'border-red-500' : 'border-secondary-300'
-                  } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
+                  className={`w-full px-4 py-2 rounded-lg border ${errors.company ? 'border-red-500' : 'border-secondary-300'
+                    } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
                   placeholder="Your Company"
                 />
                 {errors.company && <p className="mt-1 text-sm text-red-600">{errors.company}</p>}
@@ -225,9 +222,8 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   rows="4"
-                  className={`w-full px-4 py-2 rounded-lg border ${
-                    errors.message ? 'border-red-500' : 'border-secondary-300'
-                  } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
+                  className={`w-full px-4 py-2 rounded-lg border ${errors.message ? 'border-red-500' : 'border-secondary-300'
+                    } focus:ring-2 focus:ring-primary-500 focus:border-primary-500`}
                   placeholder="Tell us about your project..."
                 />
                 {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
@@ -236,9 +232,8 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full bg-primary-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 ${
-                  isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:bg-primary-700 hover:shadow-lg'
-                }`}
+                className={`w-full bg-primary-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : 'hover:bg-primary-700 hover:shadow-lg'
+                  }`}
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">

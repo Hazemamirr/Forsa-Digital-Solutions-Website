@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaChartLine, FaUsers, FaLightbulb, FaRocket, FaAward, FaHandshake } from 'react-icons/fa';
 import { Contact } from './Contact';
-import logo from '/Forsa-Analytics_Logo.png';
+import logo from '/images/Forsa-Digital-Solutions-Logo.png';
 import hazemMowafi from '/images/team/Hazem Mowafi.jpg';
 import hamzaTayel from '/images/team/Hamza Tayel.jpg';
 import hazemAmir from '/images/team/Hazem Amir.jpg';
@@ -81,7 +81,7 @@ export function About() {
       title: "COO",
       role: "Co-founder",
       expertise: "Data Security Expert",
-      bio: `With hands-on experience in cybersecurity, penetration testing, media buying, and digital solutions, Hazem has contributed to projects that strengthen system security, enhance online presence, and support smarter business decisions. Certified through the IBM Cybersecurity Analyst Professional Certificate and advanced specialization programs, he has applied skills in Python scripting, network defense, and incident response alongside expertise in managing digital ad campaigns and optimizing marketing performance. His work spans ethical hacking, web application testing, cryptographic tools, and data-driven media strategies, all aimed at building resilient systems and expanding business growth. Motivated by a vision of helping organizations harness both security and digital innovation, he is dedicated to turning technical expertise and marketing insights into sustainable solutions and long-term success.`
+      bio: `Hazem Amir is a cybersecurity enthusiast with hands-on experience in penetration testing, network security, and digital forensics. He has worked on projects ranging from building Python-based ethical hacking tools to conducting web application vulnerability assessments and exploiting systems in controlled lab environments. Certified through the IBM Cybersecurity Analyst Professional Certificate, the IBM Advanced Cybersecurity Specialization, and NTI & ITIDA’s Cybersecurity Program, Hazem bridges technical expertise with a strong foundation in compliance frameworks and incident response. His passion lies in safeguarding digital assets and empowering organizations to build resilient, secure systems.`
     }
   ];
   const [selectedMember, setSelectedMember] = useState(null);
