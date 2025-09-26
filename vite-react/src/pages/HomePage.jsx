@@ -37,7 +37,7 @@ export default function HomePage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
-            Why Choose Forsa-Analytics?
+            Why Choose Forsa Digital Solutions?
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-6 bg-gray-50 rounded-lg">

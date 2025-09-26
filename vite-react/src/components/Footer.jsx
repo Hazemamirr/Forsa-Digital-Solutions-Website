@@ -11,7 +11,7 @@ export function Footer() {
                     <Link to="/portfolio" className="hover:text-blue-600 transition">Portfolio</Link>
                     <Link to="/about" className="hover:text-blue-600 transition">About</Link>
                 </div>
-                <p>© {new Date().getFullYear()} Forsa-Analytics. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} Forsa Digital Solutions. All rights reserved.</p>
             </div>
         </footer>
     );

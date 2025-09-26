@@ -105,7 +105,7 @@ export function About() {
               </p>
             </div>
             <div className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto">
-              <img src={logo} alt="Forsa-Analytics Logo" className="w-full max-w-3xl max-h-56 object-contain rounded-lg" />
+              <img src={logo} alt="Forsa Digital Solutions Logo" className="w-full max-w-3xl max-h-56 object-contain rounded-lg" />
             </div>
           </div>
           {/* Remove the Our team collaborating image and its container from the Our Story section */}
@@ -196,7 +196,7 @@ export function About() {
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold text-white mb-8">Ready to Transform Your Data Strategy?</h2>
           <p className="text-xl text-primary-100 mb-4">
-            Join the growing list of companies that trust Forsa-Analytics for their data needs.
+            Join the growing list of companies that trust Forsa Digital Solutions for their data needs.
           </p>
         </div>
         <Contact />

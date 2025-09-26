@@ -47,7 +47,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Brand on the left */}
           <div className="flex-shrink-0">
-            <Link to="/" className="font-bold text-2xl text-primary-800 tracking-wide">Forsa-Analytics</Link>
+            <Link to="/" className="font-bold text-2xl text-primary-800 tracking-wide">Forsa Digital Solutions</Link>
           </div>
           {/* Desktop Nav on the right */}
           <nav className="hidden md:flex items-center space-x-4 ml-auto">

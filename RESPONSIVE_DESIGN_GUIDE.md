@@ -1,7 +1,7 @@
-# Responsive Design Guide for Forsa-Analytics Website
+# Responsive Design Guide for Forsa Digital Solutions Website
 
 ## Overview
-This guide documents the comprehensive responsive design implementation that makes the Forsa-Analytics website friendly across all device types including mobile phones, tablets, laptops, and desktop computers.
+This guide documents the comprehensive responsive design implementation that makes the Forsa Digital Solutions website friendly across all device types including mobile phones, tablets, laptops, and desktop computers.
 
 ## Responsive Breakpoints
 
@@ -275,4 +275,4 @@ lg:px-8 /* 32px - Large */
 
 ---
 
-This responsive design implementation ensures that the Forsa-Analytics website provides an optimal user experience across all device types, from mobile phones to large desktop displays.
+This responsive design implementation ensures that the Forsa Digital Solutions website provides an optimal user experience across all device types, from mobile phones to large desktop displays.
